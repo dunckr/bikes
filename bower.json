@@ -4,5 +4,7 @@
   "dependencies": {
     "jquery": "~1.11.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "underscore": "~1.6.0"
+  }
 }
