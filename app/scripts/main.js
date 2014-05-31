@@ -19,6 +19,10 @@ $(function() {
     }).addTo(map);
   }
 
+  $('#opacity').click(function() {
+      $('.leaflet-marker-icon').css('opacity', 0.2);
+  });
+
   $('#racks').click(function() {
     $.getJSON('mock/cycle-racks.geojson', function(data) {
       _.each(data.features, function(point) {
@@ -39,34 +43,35 @@ $(function() {
     });
   });
 
-  $.getJSON('mock/bike-thefts.json', function(data) {
+  $('#thefts').click(function() {
 
-    _.each(data, function(theft) {
-        var current = theft.stats['12'];
-        var icon = 'blue_circle';
-        var size = [64, 64]
-        if (current > 150) {
-            icon = 'red_circle';
-            size = [96,96];
-        } else if (current > 100) {
-            icon = 'orange_circle';
-        } else if (current > 50) {
-            icon = 'yellow_circle';
-        } else {
-          size = [32,32];
-        }
-        console.log(icon);
+    $.getJSON('mock/bike-thefts.json', function(data) {
 
-        var theftMarker = L.icon({
-            iconUrl: '/images/' + icon + '.png',
-            iconSize: size
-        });
+      _.each(data, function(theft) {
+          var current = theft.stats['12'];
+          var icon = 'blue_circle';
+          var size = [64, 64]
+          if (current > 150) {
+              icon = 'red_circle';
+              size = [96,96];
+          } else if (current > 100) {
+              icon = 'orange_circle';
+          } else if (current > 50) {
+              icon = 'yellow_circle';
+          } else {
+            size = [32,32];
+          }
 
-        L.marker(theft.coords, {icon: theftMarker}).addTo(map);
+          var theftMarker = L.icon({
+              iconUrl: '/images/' + icon + '.png',
+              iconSize: size
+          });
 
-        $('.leaflet-marker-icon').css('opacity', 0.5);
+          L.marker(theft.coords, {icon: theftMarker}).addTo(map);
+
+          $('.leaflet-marker-icon').css('opacity', 0.5);
+      });
     });
-
   });
 
 
@@ -86,14 +91,5 @@ $(function() {
   //
   // });
 
-  // $.getJSON('mock/strava-stats.json', function(data) {
-  //   console.log(data[0]);
-  //   _.each(data, function(street) {
-  //     // console.log(street);
-  //     // if (street.OSM_META !== '') {
-  //         // console.log(street.OSM_META);
-  //     // }
-  //   });
-  // });
 
 });
