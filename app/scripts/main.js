@@ -43,7 +43,7 @@ $(function() {
     });
   });
 
-  $('#thefts').click(function() {
+  $('#thefts2').click(function() {
 
     $.getJSON('mock/bike-thefts.json', function(data) {
 
@@ -74,27 +74,36 @@ $(function() {
     });
   });
 
+  $('#thefts').click(function() {
 
-  $.getJSON('mock/glasgow-wards.json', function(data) {
-    console.log(data);
-    _.each(data, function(ward) {
-      L.geoJson(ward,
-    {
-        style: function(feature) {
-            var r = 31 + 96+128 * feature.properties.Strength;
-            var c = "#"+(r | 0).toString(16)+"2222";
-            console.log(r);
-            console.log(c);
-            return {
-                "color": c,
-                "weight": 4,
-                "opacity": 1.0
-            }
-        }
+    $.getJSON('mock/glasgow-wards.json', function(data) {
+      console.log(data);
+      _.each(data, function(ward) {
+        L.geoJson(ward,
+      {
+          style: function(feature) {
+              var color = feature.properties.Color;
+              var hex = '#049BD2';
+              var opacity = 1.0
+              if (color > 150) {
+                  hex = '#FF2B1D';
+                  opacity = 0.1;
+              } else if (color > 100) {
+                  hex = '#FF8230';
+              } else if (color > 50) {
+                  hex = '#F3D702';
+              } else {
+              }
+              return {
+                  "color": hex,
+                  "weight": 1,
+                  "opacity": opacity
+              }
+          }
 
-    }).addTo(map);
+      }).addTo(map);
+      });
     });
   });
-
 
 });
