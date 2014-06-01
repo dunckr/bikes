@@ -75,21 +75,26 @@ $(function() {
   });
 
 
-  // $.getJSON('mock/wards.geojson', function(data) {
-  //   console.log(data);
-  //   L.geoJson(data).addTo(map);
-  //
-  //   // _.each(data.features, function(point) {
-  //   //
-  //   //   var points = point.geometry.coordinates;
-  //   //   L.layerGroup(points)
-  //   //       // .addLayer(polyline)
-  //   //       .addTo(map);
-  //   //
-  //   // });
-  //
-  //
-  // });
+  $.getJSON('mock/glasgow-wards.json', function(data) {
+    console.log(data);
+    _.each(data, function(ward) {
+      L.geoJson(ward,
+    {
+        style: function(feature) {
+            var r = 31 + 96+128 * feature.properties.Strength;
+            var c = "#"+(r | 0).toString(16)+"2222";
+            console.log(r);
+            console.log(c);
+            return {
+                "color": c,
+                "weight": 4,
+                "opacity": 1.0
+            }
+        }
+
+    }).addTo(map);
+    });
+  });
 
 
 });

@@ -1,3 +1,16 @@
 #map {
   height: 600px;
 }
+
+button {
+  border-radius: 4px;
+  /* Button Background: */
+  background: #D90A24;
+
+  font-family: SourceSansPro-Regular;
+  font-size: 20px;
+  color: #FFFFFF;
+  line-height: 25px;
+  /* Join the Hunt: */
+  text-shadow: 0px 1px 0px #FFFFFF;
+}
