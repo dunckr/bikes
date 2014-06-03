@@ -5,6 +5,10 @@ $(function() {
 		id: 'examples.map-20v6611k'
 	}).addTo(map);
 
+  $('.leaflet-control').hide();
+  $('.leaflet-control-attribution').hide();
+
+
   var bikeMarker = L.icon({
       iconUrl: '/images/blackdot.png',
       iconSize: [8, 8]
@@ -44,9 +48,7 @@ $(function() {
   });
 
   $('#thefts2').click(function() {
-
     $.getJSON('mock/bike-thefts.json', function(data) {
-
       _.each(data, function(theft) {
           var current = theft.stats['12'];
           var icon = 'blue_circle';
@@ -75,7 +77,6 @@ $(function() {
   });
 
   $('#thefts').click(function() {
-
     $.getJSON('mock/glasgow-wards.json', function(data) {
       console.log(data);
       _.each(data, function(ward) {
@@ -100,8 +101,21 @@ $(function() {
                   "opacity": opacity
               }
           }
-
       }).addTo(map);
+      });
+    });
+  });
+
+  var accomodationMarker = L.icon({
+      iconUrl: '/images/home.png',
+      // iconUrl: '/images/blackdot.png',
+      iconSize: [32, 32]
+  });
+
+  $('#accomodation').click(function() {
+    $.getJSON('mock/accomodation.json', function(accomodations) {
+      _.each(accomodations, function(accomodation) {
+          L.marker(accomodation.coords, {icon: accomodationMarker}).addTo(map);
       });
     });
   });
